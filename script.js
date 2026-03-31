@@ -48,3 +48,4 @@ adsBtn.addEventListener('click', () => {
 function updateUI() {
     balanceEl.innerText = balance;
 }
+window.Telegram.WebApp.expand();
