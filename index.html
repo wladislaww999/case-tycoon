@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Case Tycoon</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div class="app-container">
-        <header class="top-nav">
-            <div class="user-block">
-                <div class="avatar-ring-empty">
-                    <div class="level-tag-centered">1</div>
+        <header class="header">
+            <div class="user-info">
+                <div class="avatar-container">
+                    <div class="lvl-badge">1</div>
                 </div>
-                <div class="user-text">
-                    <h3>Lvl 1</h3>
-                    <p>До Lvl 2: 0/100 XP</p>
+                <div class="user-stats">
+                    <div class="lvl-text">Lvl 1</div>
+                    <div class="xp-text">До Lvl 2: 0/100 XP</div>
                 </div>
             </div>
-            <div class="balance-pill">
-                <span class="balance-num">100</span>
-                <img src="ticket.png" class="ticket-main">
+            <div class="balance-badge">
+                <span id="balance">100</span>
+                <img src="ticket.png" alt="ticket">
             </div>
         </header>
 
-        <main class="game-area">
-            <h1 class="gold-title">BRONZE CASE</h1>
+        <main class="main-content">
+            <h1 class="case-title">BRONZE CASE</h1>
             
-            <div class="case-container">
-                <img src="bronze-case.png" class="mega-case" id="main-case">
+            <div class="case-display">
+                <div class="case-glow"></div>
+                <img src="bronze-case.png" id="main-case" alt="Case">
             </div>
-            
-            <div class="action-buttons">
-                <button id="open-btn" class="btn-v1-green">
-                    ОТКРЫТЬ <div class="price-box">50 <img src="ticket.png" class="ticket-btn"></div>
+
+            <div class="action-area">
+                <button id="open-btn" class="btn btn-open">
+                    ОТКРЫТЬ 
+                    <div class="price-tag">
+                        50 <img src="ticket.png" alt="t">
+                    </div>
                 </button>
-                <button id="ads-btn" class="btn-v1-blue">
-                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="ticket-btn">
+                <button id="ads-btn" class="btn btn-ads">
+                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" alt="t">
                 </button>
             </div>
         </main>
 
-        <nav class="footer-nav">
-            <div class="nav-tab active">
+        <nav class="nav-bar">
+            <div class="nav-item active">
                 <span class="nav-icon">🏠</span>
                 <span class="nav-label">ДОМ</span>
             </div>
-            <div class="nav-tab">
+            <div class="nav-item">
                 <span class="nav-icon">🛒</span>
                 <span class="nav-label">МАГАЗИН</span>
             </div>
-            <div class="nav-tab">
+            <div class="nav-item">
                 <span class="nav-icon">👥</span>
                 <span class="nav-label">ДРУЗЬЯ</span>
             </div>
-            <div class="nav-tab">
+            <div class="nav-item">
                 <span class="nav-icon">👤</span>
                 <span class="nav-label">ПРОФИЛЬ</span>
             </div>
