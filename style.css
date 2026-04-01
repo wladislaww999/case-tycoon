@@ -127,22 +127,23 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 100px; /* Этот отступ поднимает кнопки НАД нижним меню */
 }
 
+/* Сами кнопки делаем тоньше */
 .btn {
     width: 90%;
-    height: 60px;
-    border-radius: 15px;
-    border: none;
-    font-size: 18px;
+    height: 52px; /* Было 60-68px, теперь 52px — они станут заметно тоньше и изящнее */
+    border-radius: 14px;
+    font-size: 17px; /* Чуть уменьшили шрифт под новую высоту */
     font-weight: 900;
+    border: none;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
 }
 
 .btn-open { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
@@ -162,13 +163,19 @@ body {
 
 /* НИЖНЕЕ МЕНЮ */
 .nav-bar {
-    height: 85px;
+    position: fixed; /* Фиксируем строго внизу */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px; /* Немного уменьшили высоту для аккуратности */
     background: #0d0d0d;
     border-top: 1px solid #222;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 300px; /* Отступ под «челку» внизу */
+    padding-bottom: 15px; /* Отступ от края экрана/кнопок андроида */
+    z-index: 1000;
+}
 }
 
 .nav-item {
