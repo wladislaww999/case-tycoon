@@ -8,56 +8,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="app-container">
+    <div class="app-container">
         <header class="top-nav">
             <div class="user-block">
-                <div class="avatar-ring">
-                    <div class="lvl-badge">1</div>
+                <div class="avatar-ring-empty">
+                    <div class="level-tag-centered">1</div>
                 </div>
-                <div class="user-info">
+                <div class="user-text">
                     <h3>Lvl 1</h3>
                     <p>До Lvl 2: 0/100 XP</p>
                 </div>
             </div>
-            <div class="balance-block">
-                <span class="balance-value">100</span>
-                <img src="ticket.png" class="balance-icon large-icon">
+            <div class="balance-pill">
+                <span class="balance-num">100</span>
+                <img src="ticket.png" class="ticket-main">
             </div>
         </header>
 
-        <main class="main-content">
-            <h1 class="case-title-gold">BRONZE CASE</h1>
+        <main class="game-area">
+            <h1 class="gold-title">BRONZE CASE</h1>
             
-            <div class="case-visual-wrapper">
-                <img src="bronze-case.png" id="main-case" class="huge-case">
+            <div class="case-container">
+                <img src="bronze-case.png" class="mega-case" id="main-case">
             </div>
             
-            <div class="actions-container shifted-up">
-                <button id="open-btn" class="btn-green-premium">
-                    ОТКРЫТЬ <span class="price-tag">50 <img src="ticket.png" class="btn-icon large-icon"></span>
+            <div class="action-buttons">
+                <button id="open-btn" class="btn-v1-green">
+                    ОТКРЫТЬ <div class="price-box">50 <img src="ticket.png" class="ticket-btn"></div>
                 </button>
-                <button id="ads-btn" class="btn-blue-premium">
-                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon large-icon"></span>
+                <button id="ads-btn" class="btn-v1-blue">
+                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="ticket-btn">
                 </button>
             </div>
         </main>
 
-        <nav class="bottom-nav">
-            <div class="nav-item active">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png">
-                <span>🏠 ДОМ</span>
+        <nav class="footer-nav">
+            <div class="nav-tab active">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">ДОМ</span>
             </div>
-            <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png">
-                <span>🛒 МАГАЗИН</span>
+            <div class="nav-tab">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">МАГАЗИН</span>
             </div>
-            <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/group.png">
-                <span>👥 ДРУЗЬЯ</span>
+            <div class="nav-tab">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">ДРУЗЬЯ</span>
             </div>
-            <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/user-male-circle.png">
-                <span>👤 ПРОФИЛЬ</span>
+            <div class="nav-tab">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">ПРОФИЛЬ</span>
             </div>
         </nav>
     </div>
