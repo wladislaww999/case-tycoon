@@ -6,170 +6,145 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     background-color: #0d0d0d;
     color: white;
     height: 100vh;
-    width: 100vw;
     overflow: hidden;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 .app-container {
-    width: 100%;
-    max-width: 500px;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
+    height: 100%;
+    padding: 0 15px;
 }
 
-/* ШАПКА */
+/* ИСПРАВЛЕННАЯ ШАПКА */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 15px;
-    z-index: 10;
+    padding-top: 20px;
+    height: 80px; /* Фиксируем высоту, чтобы ничего не прыгало */
 }
 
-.user-block { display: flex; align-items: center; gap: 10px; }
+.user-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
 .avatar-ring {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border: 3px solid #ff9100;
     border-radius: 50%;
     position: relative;
-    background: rgba(255, 145, 0, 0.1);
 }
 
 .lvl-badge {
     position: absolute;
-    bottom: -6px;
+    bottom: -5px;
     left: 50%;
     transform: translateX(-50%);
     background: #ff9100;
-    color: black;
-    font-weight: 900;
+    color: #000;
     font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 5px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
-.user-info h3 { font-size: 14px; font-weight: 800; }
-.user-info p { font-size: 10px; color: #aaa; }
+.lvl-text h3 { font-size: 14px; }
+.lvl-text p { font-size: 10px; color: #888; }
 
 .balance-badge {
     background: #1a1a1a;
-    padding: 8px 15px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 12px;
     border: 1px solid #333;
+    font-weight: 900;
+    font-size: 18px;
 }
 
-.balance-value { font-size: 18px; font-weight: 900; }
-.balance-icon { width: 18px; height: 18px; }
-
-/* ГЛАВНЫЙ ЭКРАН */
+/* КОНТЕНТ */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Размещение сверху вниз */
-    padding: 20px 0 100px 0; /* Оставляем место под меню */
-    position: relative;
+    justify-content: space-around; /* Равномерно распределяет Case, Title и Кнопки */
+    padding-bottom: 90px; /* Место для меню */
 }
 
-/* ЗОЛОТОЙ ПРЕМИУМ ЗАГОЛОВОК */
 .premium-gold-title {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 10px;
-    margin-bottom: 50px;
     background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    text-align: center;
 }
 
-/* КЕЙС */
-.case-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 70px; /* Расстояние от кейса до кнопок */
-}
-
+/* БОЛЬШОЙ КЕЙС */
 .huge-case {
-    width: 300px; /* Сделали его еще больше */
-    z-index: 1;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+    width: 320px; /* Сделал еще больше */
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
 }
 
-/* КНОПКИ ДЕЙСТВИЙ (ОНИ ТЕПЕРЬ ВИДИМЫ!) */
-.safe-actions-area {
+/* КНОПКИ */
+.action-area {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: auto; /* Прижимаем к меню снизу */
-    padding-bottom: 10px; /* Отступ от нижнего меню */
-    z-index: 5;
+    gap: 12px;
 }
 
-.btn-green-v1, .btn-blue-v1 {
-    width: 90%;
-    height: 58px; /* Чуть тоньше и аккуратнее (было 68) */
-    border-radius: 16px;
-    font-size: 19px;
+.btn {
+    width: 100%;
+    height: 54px;
+    border-radius: 15px;
     font-weight: 900;
+    font-size: 18px;
     border: none;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: transform 0.1s;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.btn-green-v1:active, .btn-blue-v1:active {
-    transform: scale(0.98);
+.btn-green { background: linear-gradient(180deg, #76b337 0%, #46702e 100%); }
+.btn-blue { background: linear-gradient(180deg, #4a90e2 0%, #2b5a8f 100%); }
+
+.price-box {
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
-.btn-green-v1 { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
-.btn-blue-v1 { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); }
-
-.price-padd {
-    background: rgba(0,0,0,0.25);
-    padding: 5px 12px;
-    border-radius: 10px;
-    font-size: 15px;
-}
-
-.btn-icon { width: 14px; height: 14px; }
-
-/* НИЖНЕЕ МЕНЮ */
-.footer-nav {
-    height: 85px;
-    background: #0d0d0d;
-    border-top: 1px solid #222;
+/* МЕНЮ */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #111;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 15px; /* Отступ под челку */
-    z-index: 100;
+    border-top: 1px solid #222;
+    padding-bottom: 10px;
 }
 
 .nav-item {
@@ -177,9 +152,9 @@ body {
     flex-direction: column;
     align-items: center;
     color: #555;
-    gap: 5px;
+    gap: 4px;
 }
 
 .nav-item.active { color: #ff9100; }
-.nav-icon { font-size: 22px; }
+.nav-icon { font-size: 20px; }
 .nav-label { font-size: 10px; font-weight: 800; }
