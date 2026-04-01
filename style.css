@@ -131,8 +131,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 120px; /* Еще выше от нижнего меню */
+    gap: 12px; /* Расстояние между зеленой и синей кнопками */
+    margin-bottom: 140px; /* Регулируй это число, чтобы поднять обе кнопки выше */
 }
 
 .btn {
