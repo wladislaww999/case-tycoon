@@ -34,16 +34,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 15px;
-    flex-shrink: 0;
+    z-index: 10;
 }
 
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.user-block { display: flex; align-items: center; gap: 10px; }
 
-.avatar-container {
+.avatar-ring {
     width: 54px;
     height: 54px;
     border: 3px solid #ff9100;
@@ -58,15 +54,15 @@ body {
     left: 50%;
     transform: translateX(-50%);
     background: #ff9100;
-    color: #000;
+    color: black;
     font-weight: 900;
     font-size: 10px;
     padding: 2px 8px;
     border-radius: 5px;
 }
 
-.lvl-text { font-size: 14px; font-weight: 800; }
-.xp-text { font-size: 10px; color: #aaa; }
+.user-info h3 { font-size: 14px; font-weight: 800; }
+.user-info p { font-size: 10px; color: #aaa; }
 
 .balance-badge {
     background: #1a1a1a;
@@ -78,135 +74,109 @@ body {
     border: 1px solid #333;
 }
 
-.balance-badge span { font-size: 18px; font-weight: 900; }
-.balance-badge img { width: 18px; height: 18px; }
+.balance-value { font-size: 18px; font-weight: 900; }
+.balance-icon { width: 18px; height: 18px; }
 
-/* ЦЕНТРАЛЬНАЯ ОБЛАСТЬ */
+/* ГЛАВНЫЙ ЭКРАН */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; 
-    /* ПОСТАВЬ ТУТ 180px ИЛИ 200px, ЧТОБЫ ПОДНЯТЬ КНОПКИ ВЫШЕ */
-    padding-bottom: 180px; 
+    justify-content: flex-start; /* Размещение сверху вниз */
+    padding: 20px 0 100px 0; /* Оставляем место под меню */
+    position: relative;
 }
 
-/* 2. Этот блок ДОЛЖЕН иметь margin-bottom: auto */
-.case-title {
-    font-size: 32px;
+/* ЗОЛОТОЙ ПРЕМИУМ ЗАГОЛОВОК */
+.premium-gold-title {
+    font-size: 30px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: linear-gradient(180deg, #FFD700 0%, #FDB931 50%, #9F7928 100%);
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(253, 185, 49, 0.3));
-    
-    /* ОБЯЗАТЕЛЬНО ПРОВЕРЬ ЭТУ СТРОЧКУ */
-    margin-bottom: auto; 
-    padding-top: 20px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 /* КЕЙС */
-.case-display {
-    position: relative;
+.case-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 50px; /* Отступ от кейса до кнопок */
+    margin-bottom: 70px; /* Расстояние от кейса до кнопок */
 }
 
-.case-glow {
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(255, 145, 0, 0.15) 0%, transparent 70%);
-    z-index: 0;
-}
-
-#main-case {
-    width: 280px; 
+.huge-case {
+    width: 300px; /* Сделали его еще больше */
     z-index: 1;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
 }
 
-/* КНОПКИ (УЛУЧШЕННЫЕ) */
-.action-area {
+/* КНОПКИ ДЕЙСТВИЙ (ОНИ ТЕПЕРЬ ВИДИМЫ!) */
+.safe-actions-area {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    /* Это значение поднимет кнопки над меню еще выше, если нужно */
-    margin-bottom: 20px; 
+    gap: 15px;
+    margin-top: auto; /* Прижимаем к меню снизу */
+    padding-bottom: 10px; /* Отступ от нижнего меню */
+    z-index: 5;
 }
 
-.btn {
-    width: 92%; /* Стали чуть шире */
-    height: 52px; /* Идеальная толщина (как у зеленой) */
-    border-radius: 14px;
-    font-size: 17px;
+.btn-green-v1, .btn-blue-v1 {
+    width: 90%;
+    height: 58px; /* Чуть тоньше и аккуратнее (было 68) */
+    border-radius: 16px;
+    font-size: 19px;
     font-weight: 900;
-    text-transform: uppercase;
     border: none;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
-    transition: all 0.1s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.1s;
 }
 
-.btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+.btn-green-v1:active, .btn-blue-v1:active {
+    transform: scale(0.98);
 }
 
-.btn-open { 
-    background: linear-gradient(180deg, #76b337 0%, #527e26 100%); 
+.btn-green-v1 { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
+.btn-blue-v1 { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); }
+
+.price-padd {
+    background: rgba(0,0,0,0.25);
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 15px;
 }
 
-.btn-ads { 
-    background: linear-gradient(180deg, #4a90e2 0%, #2b5a8f 100%); 
-}
+.btn-icon { width: 14px; height: 14px; }
 
-.price-tag {
-    background: rgba(0,0,0,0.2);
-    padding: 4px 12px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.price-tag img, .btn-ads img { 
-    width: 16px; 
-    height: 16px; 
-}
-
-/* НИЖНЕЕ МЕНЮ (ПАРЯЩЕЕ) */
-.nav-bar {
-    position: fixed;
-    bottom: 25px; /* Поднято выше уровня системных кнопок */
-    left: 15px;
-    right: 15px;
-    height: 75px;
-    background: #151515;
-    border-radius: 22px;
+/* НИЖНЕЕ МЕНЮ */
+.footer-nav {
+    height: 85px;
+    background: #0d0d0d;
+    border-top: 1px solid #222;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 1000;
+    padding-bottom: 15px; /* Отступ под челку */
+    z-index: 100;
 }
 
 .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #444;
+    color: #555;
     gap: 5px;
 }
 
