@@ -11,118 +11,101 @@ body {
     background-color: #0d0d0d;
     color: white;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Чтобы ничего не дергалось */
+    overflow: hidden;
 }
 
 /* КОНТЕЙНЕР НА ВЕСЬ ЭКРАН */
 .app-container {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    width: 100%;
     height: 100%;
 }
 
 /* ШАПКА */
 .top-nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 110px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    padding-top: 10px;
 }
 
-.user-block {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: relative;
-}
+.user-block { display: flex; align-items: center; gap: 12px; position: relative; }
 
+/* ПУСТОЙ КРУЖОК АВАТАРА */
 .avatar-frame {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border: 2px solid #ff9100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: rgba(255, 145, 0, 0.1);
     box-shadow: 0 0 15px rgba(255, 145, 0, 0.3);
 }
 
-.add-avatar-text {
-    font-size: 8px;
-    color: #ff9100;
-    font-weight: bold;
-    text-align: center;
+.lvl-badge { 
+    position: absolute; 
+    bottom: -5px; 
+    left: 15px; 
+    background: #ff9100; 
+    color: black; 
+    padding: 2px 10px; 
+    border-radius: 5px; 
+    font-size: 10px; 
+    font-weight: 900; 
 }
-
-.lvl-badge {
-    position: absolute;
-    bottom: -5px;
-    left: 15px;
-    background: #ff9100;
-    color: black;
-    padding: 2px 10px;
-    border-radius: 5px;
-    font-size: 10px;
-    font-weight: 900;
-}
-
 .user-info h3 { font-size: 14px; }
 .user-info p { font-size: 10px; color: #888; }
 
-.balance-block {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 15px;
-    border-radius: 12px;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
+.balance-block { display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 12px; gap: 8px; border: 1px solid rgba(255, 255, 255, 0.1); }
 .balance-value { font-size: 18px; font-weight: 900; }
 .balance-icon { width: 22px; height: 22px; }
 
-/* ГЛАВНАЯ ЧАСТЬ (КЕЙС) */
-main {
-    flex: 1; /* ЗАНИМАЕТ ВСЁ СВОБОДНОЕ МЕСТО */
+/* ГЛАВНАЯ ЧАСТЬ */
+.main-content {
+    position: absolute;
+    top: 110px; 
+    bottom: 100px; /* Оставили больше места для нижнего меню */
+    left: 0; right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Центрирует кейс и кнопки */
-    gap: 20px;
+    justify-content: space-between; 
+    padding: 15px 0;
 }
 
-.case-title {
-    font-size: 24px;
-    letter-spacing: 2px;
-    font-weight: 900;
+.case-title { font-size: 24px; letter-spacing: 2px; font-weight: 900; text-transform: uppercase;}
+
+/* КЕЙС (СДЕЛАЛИ ЕЩЕ БОЛЬШЕ) */
+.case-visual.large-case {
+    position: absolute;
+    top: 48%; /* Чуть выше центра, чтобы сбалансировать поднятые кнопки */
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
 
 .case-visual.large-case img {
-    width: 250px; /* Оптимальный размер */
+    width: 290px; /* Увеличили размер кейса */
     filter: drop-shadow(0 0 20px rgba(255, 145, 0, 0.2));
 }
 
-/* КНОПКИ */
-.actions {
+/* КНОПКИ (ПОДНЯЛИ ВЫШЕ И УВЕЛИЧИЛИ ОТСТУП МЕЖДУ НИМИ) */
+.actions.shifted-up {
+    margin-bottom: 40px; /* Сильнее оторвали от нижнего края */
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 15px; /* Увеличили расстояние между кнопками */
 }
 
 .main-action {
-    width: 85%;
-    height: 55px;
-    border-radius: 15px;
-    font-size: 16px;
+    width: 90%;
+    height: 65px; /* Сделали кнопки чуть выше */
+    border-radius: 16px;
+    font-size: 18px;
     font-weight: 900;
-    margin: 6px 0;
     border: none;
     display: flex;
     justify-content: center;
@@ -133,34 +116,33 @@ main {
 .btn-green { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); color: white; }
 .btn-blue { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); color: white; }
 
-.price-tag {
-    background: rgba(0,0,0,0.2);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
+.price-tag { background: rgba(0,0,0,0.2); padding: 4px 10px; border-radius: 6px; font-size: 14px; }
 .btn-icon { width: 14px; }
 
-/* МЕНЮ */
+/* НИЖНЕЕ МЕНЮ (СДЕЛАЛИ ВЫШЕ, ТЕКСТ ЖИРНЕЕ) */
 .bottom-nav {
-    height: 80px;
-    background: #111;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100px; /* Увеличили высоту панели */
+    background: #0d0d0d;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
+    padding-bottom: 25px; /* Сильнее приподняли контент меню над нижним краем экрана */
 }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #555;
-    font-size: 9px;
-    font-weight: bold;
+.nav-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    color: #555; 
+    font-size: 11px; /* Сделали текст крупнее */
+    font-weight: 900; /* Сделали текст максимально жирным */
+    letter-spacing: 0.5px;
 }
-
 .nav-item.active { color: #ff9100; }
-.nav-item img { width: 24px; margin-bottom: 4px; }
+.nav-item img { 
+    width: 28px; /* Сделали иконки чуть больше */
+    margin-bottom: 6px; 
+}
