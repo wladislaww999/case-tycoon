@@ -5,44 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Case Tycoon</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-<div class="app-container">
-    <header class="header">
-        <div class="user-info">
-            <div class="avatar-box"><div class="lvl-tag">1</div></div>
-            <div class="user-stats">
-                <div class="lvl-val">Lvl 1</div>
-                <div class="xp-val">0/100 XP</div>
+    <div class="app-container">
+        <header class="header">
+            <button class="info-btn" onclick="toggleInfo()">i</button>
+            <div class="balance-badge"><span id="balance">100</span> 🎫</div>
+        </header>
+
+        <main class="main-content">
+            <h1 class="gold-title">BRONZE CASE</h1>
+            
+            <div class="display-zone" id="display-zone">
+                <img src="bronze-case-real.png" class="main-case-img" id="case-img" alt="Case">
+            </div>
+
+            <div class="buttons-group">
+                <button class="action-btn green-btn" onclick="startSpin()">
+                    ОТКРЫТЬ <span class="price">10 📺</span>
+                </button>
+                <button class="action-btn blue-btn" onclick="addTicket()">
+                    ▶ ПОЛУЧИТЬ +1 🎫
+                </button>
+            </div>
+        </main>
+
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="toggleInfo()">&times;</span>
+                <h2 class="gold-text">СОДЕРЖИМОЕ КЕЙСА:</h2>
+                <div class="loot-list">
+                    <div class="loot-item mythic">
+                        <img src="iphone.png" alt="iPhone">
+                        <p>iPhone 15 Pro <br><span>Шанс: 0.001%</span></p>
+                    </div>
+                    <div class="loot-item mythic">
+                        <img src="dyson.png" alt="Dyson">
+                        <p>Dyson Airwrap <br><span>Шанс: 0.001%</span></p>
+                    </div>
+                    <div class="loot-item rare">
+                        <img src="apple-watch.png" alt="Watch">
+                        <p>Apple Watch 9 <br><span>Шанс: 0.01%</span></p>
+                    </div>
+                    <div class="loot-item common">
+                        <div class="ticket-icon-large">🎫</div>
+                        <p>50-100 Билетов <br><span>Шанс: 99.9%</span></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="balance-card">100 🎫</div>
-    </header>
-
-    <div class="game-content">
-        <h1 class="gold-title">BRONZE CASE</h1>
-        
-        <div class="case-zone">
-            <img src="bronze-case.png" class="main-case-img">
-        </div>
-
-        <div class="buttons-group">
-            <button class="action-btn green-btn">
-                ОТКРЫТЬ <span class="price">50 🎫</span>
-            </button>
-            <button class="action-btn blue-btn">
-                ▶ ПОЛУЧИТЬ +10 🎫
-            </button>
-        </div>
     </div>
-
-    <nav class="bottom-nav">
-        <div class="nav-btn active"><span>🏠</span><p>ДОМ</p></div>
-        <div class="nav-btn"><span>🛒</span><p>МАГАЗИН</p></div>
-        <div class="nav-btn"><span>👥</span><p>ДРУЗЬЯ</p></div>
-        <div class="nav-btn"><span>👤</span><p>ПРОФИЛЬ</p></div>
-    </nav>
-</div>
+    <script src="script.js"></script>
 </body>
 </html>
