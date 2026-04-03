@@ -1,6 +1,9 @@
+// Инициализация Telegram Web App
+const tg = window.Telegram.WebApp;
+tg.expand(); // РАЗВЕРНУТЬ НА ВЕСЬ ЭКРАН СРАЗУ
+
 let balance = 100;
 
-// Предметы, которые видит игрок в рулетке
 const items = [
     { name: 'iPhone 15 Pro', img: 'iphone.png', rarity: 'mythic' },
     { name: 'Dyson Airwrap', img: 'dyson.png', rarity: 'mythic' },
@@ -9,12 +12,20 @@ const items = [
     { name: '50 🎫', img: 'ticket-gold.png', rarity: 'common' }
 ];
 
-function addTicket() {
-    balance += 1;
+function addTicketsBatch() {
+    balance += 10;
     document.getElementById('balance').innerText = balance;
 }
 
 function startSpin() {
+    if (balance < 10) {
+        alert("Недостаточно тикетов! Нужно 10 🎫");
+        return;
+    }
+
+    balance -= 10;
+    document.getElementById('balance').innerText = balance;
+
     const zone = document.getElementById('display-zone');
     zone.innerHTML = `
         <div class="roulette-wrapper">
@@ -25,24 +36,26 @@ function startSpin() {
     const line = document.getElementById('line');
     let tapeContent = "";
     
-    // Создаем длинную ленту из 80 предметов
     for(let i=0; i<80; i++) {
         const item = items[Math.floor(Math.random() * items.length)];
-        // Если это билет и нет картинки, ставим смайлик
-        const imgTag = item.img.includes('.png') ? `<img src="${item.img}">` : `<div style="font-size:40px">🎫</div>`;
+        const imgTag = (item.img && item.img.includes('.png')) 
+            ? `<img src="${item.img}">` 
+            : `<div style="font-size:40px">🎫</div>`;
         tapeContent += `<div class="item-card ${item.rarity}">${imgTag}</div>`;
     }
     line.innerHTML = tapeContent;
 
-    // Запускаем прокрутку
     setTimeout(() => {
-        line.style.left = "-7500px"; // Длина прокрутки
+        line.style.left = "-7500px"; 
     }, 50);
 
-    // Конец анимации через 5 секунд
     setTimeout(() => {
-        alert("Почти! Выпало: 50 Билетов 🎫");
-        location.reload(); // Сброс к кейсу
+        const winAmount = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+        alert(`Почти! Выпало: ${winAmount} Билетов 🎫`);
+        balance += winAmount;
+        // Вместо полной перезагрузки, просто возвращаем кейс, чтобы экран не "прыгал"
+        zone.innerHTML = '<img src="bronze-case-real.png" class="main-case-img" id="case-img" alt="Case">';
+        document.getElementById('balance').innerText = balance;
     }, 5500);
 }
 
