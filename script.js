@@ -3,7 +3,6 @@ tg.expand();
 
 let balance = 100;
 
-// ТВОИ НОВЫЕ ПРЕДМЕТЫ
 const items = [
     { name: 'iPhone 17 PM', img: 'iphone17promax.png', rarity: 'mythic' },
     { name: 'MacBook Pro', img: 'macbook.png', rarity: 'mythic' },
@@ -13,17 +12,18 @@ const items = [
     { name: 'USDT', img: 'usdt.png', rarity: 'special' },
     { name: 'TG Premium', img: 'tgprem.png', rarity: 'special' },
     { name: 'TG Stars', img: 'tgstars.png', rarity: 'special' },
-    { name: '100$', img: 'dollar.png', rarity: 'common' }
+    { name: 'Cash Pack', img: 'dollar.png', rarity: 'common' }
 ];
 
 function addTicketsBatch() {
     balance += 10;
     document.getElementById('balance').innerText = balance;
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 }
 
 function startSpin() {
     if (balance < 100) {
-        alert("Недостаточно тикетов! Нужно 100 🎫");
+        tg.showAlert("Недостаточно средств! Нужно 100 $");
         return;
     }
 
@@ -36,12 +36,11 @@ function startSpin() {
     const line = document.getElementById('line');
     let tapeContent = "";
     
-    // Генерируем ленту из 80 случайных предметов твоих новых PNG
     for(let i=0; i<80; i++) {
         const item = items[Math.floor(Math.random() * items.length)];
         tapeContent += `
             <div class="item-card ${item.rarity}">
-                <img src="${item.img}" onerror="this.src='dollar.png'">
+                <img src="${item.img}">
                 <p>${item.name}</p>
             </div>`;
     }
@@ -52,13 +51,14 @@ function startSpin() {
     }, 50);
 
     setTimeout(() => {
-        // Логика выигрыша (всегда падают билеты/доллары для баланса)
-        const winAmount = Math.floor(Math.random() * (200 - 50 + 1)) + 50;
-        alert(`Почти! Выпало: ${winAmount}$ (сконвертировано в билеты)`);
+        // МАТЕМАТИКА: ВЫПАДАЕТ ОТ 50 ДО 70
+        const winAmount = Math.floor(Math.random() * (70 - 50 + 1)) + 50;
+        tg.showAlert(`Почти! Выпал предмет: Набор Валюты \n\nЗачислено: ${winAmount} $`);
+        
         balance += winAmount;
+        document.getElementById('balance').innerText = balance;
         
         zone.innerHTML = '<img src="casetycoon.png" class="main-case-img" id="case-img" alt="Case">';
-        document.getElementById('balance').innerText = balance;
     }, 5500);
 }
 
