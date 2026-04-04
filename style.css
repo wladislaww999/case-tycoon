@@ -1,275 +1,106 @@
-/* Подключаем жирный шрифт для премиального вида */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    user-select: none; -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: #0d0d0d;
-    color: white;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden; /* Чтобы ничего не дергалось при прокрутке рулетки */
-    display: flex;
-    justify-content: center;
+    background-color: #0d0d0d; color: white;
+    height: 100vh; width: 100vw; overflow: hidden;
+    display: flex; justify-content: center;
 }
 
 .app-container {
-    width: 100%;
-    max-width: 500px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    width: 100%; max-width: 500px; height: 100%;
+    display: flex; flex-direction: column; position: relative;
 }
 
-/* ШАПКА */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 15px;
-    flex-shrink: 0;
-}
+/* Header */
+.header { display: flex; justify-content: space-between; align-items: center; padding: 20px 15px; }
 
 .info-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 2px solid #D4AF37;
-    background: rgba(212, 175, 55, 0.1);
-    color: #D4AF37;
-    font-weight: 900;
-    font-size: 22px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 38px; height: 38px; border-radius: 50%; border: 2px solid #D4AF37;
+    background: rgba(212, 175, 55, 0.1); color: #D4AF37;
+    font-weight: 900; font-size: 22px; cursor: pointer;
 }
 
 .balance-badge {
-    background: #1a1a1a;
-    padding: 10px 18px;
-    border-radius: 15px;
-    border: 1px solid #333;
-    font-weight: 900;
-    font-size: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    background: #1a1a1a; padding: 10px 18px; border-radius: 15px;
+    border: 1px solid #333; font-weight: 900; font-size: 18px;
+    display: flex; align-items: center;
 }
 
-/* ГЛАВНЫЙ КОНТЕНТ */
+.mini-icon {
+    width: 20px; height: 20px; margin-left: 8px; object-fit: contain;
+}
+
+/* Main */
 .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
     padding: 10px 15px 40px 15px;
 }
 
-/* ЗОЛОТОЙ ЗАГОЛОВОК CASE TYCOON */
 .gold-title {
-    font-size: 32px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    font-size: 32px; font-weight: 900;
     background: linear-gradient(180deg, #FFD700 0%, #FDB931 50%, #9F7928 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 10px rgba(253, 185, 49, 0.3));
-    text-align: center;
 }
 
-.display-zone {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
+.display-zone { flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-.main-case-img {
-    width: 85%;
-    max-width: 300px;
-    height: auto;
-    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
-    transition: transform 0.3s ease;
-}
+.main-case-img { width: 85%; max-width: 300px; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8)); }
 
-/* КНОПКИ */
-.buttons-group {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+/* Buttons */
+.buttons-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 
 .action-btn {
-    width: 100%;
-    height: 58px;
-    border-radius: 16px;
-    font-weight: 900;
-    font-size: 19px;
-    border: none;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    transition: transform 0.1s;
+    width: 100%; height: 58px; border-radius: 16px; font-weight: 900;
+    font-size: 19px; border: none; color: white;
+    display: flex; justify-content: center; align-items: center; cursor: pointer;
 }
-
-.action-btn:active { transform: scale(0.97); }
 
 .green-btn { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
 .blue-btn { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); }
 
-.price {
-    background: rgba(0,0,0,0.25);
-    padding: 4px 12px;
-    border-radius: 10px;
-    font-size: 16px;
-}
+.price { background: rgba(0,0,0,0.25); padding: 4px 12px; border-radius: 10px; margin-left: 10px; display: flex; align-items: center; }
 
-/* РУЛЕТКА (ЛУДКА) */
+/* Roulette */
 .roulette-wrapper {
-    width: 100vw;
-    height: 150px;
-    background: #111;
-    border-top: 2px solid #D4AF37;
-    border-bottom: 2px solid #D4AF37;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+    width: 100vw; height: 150px; background: #111;
+    border-top: 2px solid #D4AF37; border-bottom: 2px solid #D4AF37;
+    position: relative; overflow: hidden; display: flex; align-items: center;
 }
 
-.roulette-line {
-    display: flex;
-    position: absolute;
-    left: 0;
-    transition: left 5s cubic-bezier(0.15, 0, 0.15, 1);
-}
+.roulette-line { display: flex; position: absolute; left: 0; transition: left 5s cubic-bezier(0.15, 0, 0.15, 1); }
 
 .item-card {
-    min-width: 130px;
-    height: 130px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #222;
-    padding: 10px;
+    min-width: 130px; height: 130px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; border-right: 1px solid #222;
 }
 
-.item-card img {
-    height: 70px;
-    object-fit: contain;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
-}
+.item-card img { height: 70px; object-fit: contain; }
 
-.item-card p {
-    font-size: 10px;
-    margin-top: 8px;
-    color: #aaa;
-    text-align: center;
-}
+.item-card p { font-size: 10px; margin-top: 8px; color: #aaa; text-align: center; }
 
-/* Центральный указатель рулетки */
 .roulette-wrapper::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 100%;
-    background: #D4AF37;
-    z-index: 10;
-    box-shadow: 0 0 20px #D4AF37;
+    content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 4px; height: 100%; background: #D4AF37; z-index: 10; box-shadow: 0 0 20px #D4AF37;
 }
 
-/* МОДАЛЬНОЕ ОКНО (Инфо) */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 1000;
-}
-
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; }
 .modal-content {
-    background: #1a1a1a;
-    margin: 10% auto;
-    padding: 25px;
-    width: 90%;
-    max-height: 80vh;
-    border-radius: 25px;
-    border: 1px solid #D4AF37;
-    position: relative;
-    overflow-y: auto;
+    background: #1a1a1a; margin: 10% auto; padding: 25px; width: 90%;
+    max-height: 80vh; border-radius: 25px; border: 1px solid #D4AF37; overflow-y: auto;
 }
-
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-    color: #888;
-    cursor: pointer;
-}
-
-.gold-text {
-    color: #D4AF37;
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.loot-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.loot-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px;
-    background: #0d0d0d;
-    border-radius: 15px;
-}
-
-.loot-item img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-.loot-item p {
-    font-size: 14px;
-    font-weight: 700;
-}
-
-/* РЕДКОСТЬ ДЛЯ ПРЕДМЕТОВ */
-.mythic { border: 1px solid #ff4444; background: rgba(255, 68, 68, 0.05); }
-.rare { border: 1px solid #4a90e2; background: rgba(74, 144, 226, 0.05); }
-.special { border: 1px solid #00ffcc; background: rgba(0, 255, 204, 0.05); }
-.common { border: 1px solid #444; }
-
-/* Кастомный скроллбар для модалки */
-.modal-content::-webkit-scrollbar { width: 5px; }
-.modal-content::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+.close-btn { float: right; font-size: 30px; color: #888; cursor: pointer; }
+.loot-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.loot-item { display: flex; align-items: center; gap: 15px; padding: 12px; background: #0d0d0d; border-radius: 15px; }
+.loot-item img { width: 45px; height: 45px; object-fit: contain; }
+.mythic { border: 1px solid #ff4444; }
+.rare { border: 1px solid #4a90e2; }
+.special { border: 1px solid #00ffcc; }
