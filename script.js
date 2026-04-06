@@ -13,7 +13,7 @@ const items = [
     { name: 'USDT Crypto', img: 'usdt.png', rarity: 'special' },
     { name: 'TG Prem (1y)', img: 'tgprem.png', rarity: 'special' },
     { name: 'TG Stars (5k)', img: 'tgstars.png', rarity: 'special' },
-    { name: 'Cash Pack', img: 'dollar.png', rarity: 'common' }
+    { name: 'Cash Pack', img: 'coin.png', rarity: 'common' }
 ];
 
 function addTicketsBatch() {
@@ -65,7 +65,7 @@ function startSpin() {
         const item = items[Math.floor(Math.random() * items.length)];
         tapeContent += `
             <div class="item-card ${item.rarity}">
-                <img src="${item.img}" onerror="this.src='dollar.png'">
+                <img src="${item.img}" onerror="this.src='coin.png'">
                 <p>${item.name}</p>
             </div>`;
     }
