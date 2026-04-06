@@ -29,7 +29,26 @@ body {
 .balance-badge {
     background: #1a1a1a; padding: 10px 18px; border-radius: 15px;
     border: 1px solid #333; font-weight: 900; font-size: 18px;
-    display: flex; align-items: center;
+    display: flex; align-items: center; height: 44px;
+}
+
+/* Кнопка рефералов (исправленная) */
+.ref-btn {
+    background: #1a1a1a;
+    padding: 0 15px 4px 15px; /* Добавили отступ снизу 4px, чтобы поднять эмодзи */
+    border-radius: 15px;
+    border: 1px solid #333;
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 10px;
+    height: 44px; /* Такая же высота как у баланса */
+    min-width: 50px;
 }
 
 .mini-icon {
@@ -68,36 +87,32 @@ body {
 
 .price { background: rgba(0,0,0,0.25); padding: 4px 12px; border-radius: 10px; margin-left: 10px; display: flex; align-items: center; }
 
-/* Roulette */
-.roulette-wrapper {
-    width: 100vw; height: 150px; background: #111;
-    border-top: 2px solid #D4AF37; border-bottom: 2px solid #D4AF37;
-    position: relative; overflow: hidden; display: flex; align-items: center;
-}
-
-.roulette-line { display: flex; position: absolute; left: 0; transition: left 5s cubic-bezier(0.15, 0, 0.15, 1); }
-
-.item-card {
-    min-width: 130px; height: 130px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; border-right: 1px solid #222;
-}
-
-.item-card img { height: 70px; object-fit: contain; }
-
-.item-card p { font-size: 10px; margin-top: 8px; color: #aaa; text-align: center; }
-
-.roulette-wrapper::after {
-    content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-    width: 4px; height: 100%; background: #D4AF37; z-index: 10; box-shadow: 0 0 20px #D4AF37;
-}
-
-/* Modal */
+/* Modal (Исправленные слои и крестик) */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; }
+
 .modal-content {
     background: #1a1a1a; margin: 10% auto; padding: 25px; width: 90%;
-    max-height: 80vh; border-radius: 25px; border: 1px solid #D4AF37; overflow-y: auto;
+    max-height: 80vh; border-radius: 25px; border: 1px solid #D4AF37; 
+    overflow-y: auto; position: relative; /* Нужно для позиционирования крестика */
+    padding-top: 45px; /* Место, чтобы крестик не налезал на текст */
 }
-.close-btn { float: right; font-size: 30px; color: #888; cursor: pointer; }
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 32px;
+    color: #888;
+    cursor: pointer;
+    z-index: 1100; /* На самом верхнем слое */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
 .loot-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
 .loot-item { display: flex; align-items: center; gap: 15px; padding: 12px; background: #0d0d0d; border-radius: 15px; }
 .loot-item img { width: 45px; height: 45px; object-fit: contain; }
@@ -105,79 +120,7 @@ body {
 .rare { border: 1px solid #4a90e2; }
 .special { border: 1px solid #00ffcc; }
 
-/* 1. Монетка: делаем реально большой и заметной */
-.mini-icon {
-    width: 28px !important; 
-    height: 28px !important;
-    vertical-align: middle;
-    margin-left: 6px;
-    object-fit: contain;
-}
-
-/* 2. Заблокированная кнопка: тусклая + микро-надпись */
-button.btn-locked {
-    opacity: 0.5 !important;
-    filter: grayscale(0.8) !important;
-    cursor: not-allowed;
-    position: relative;
-    box-shadow: none !important;
-}
-
-/* Сама микро-надпись */
-button.btn-locked::after {
-    content: 'ЗАБЛОКИРОВАНО';
-    position: absolute;
-    top: 3px;             /* Чуть отступили от верха */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 7px;       /* Сверх-мелкий размер */
-    letter-spacing: 0.5px;
-    background: rgba(255, 0, 0, 0.6);
-    padding: 1px 5px;
-    border-radius: 3px;
-    color: white;
-    font-weight: 700;
-}
-
-/* 3. Цена внутри заблокированной кнопки */
-.btn-locked .price {
-    font-size: 0.85em;
-    background: rgba(0, 0, 0, 0.4) !important;
-    color: #ccc;
-}
-
-/* 4. Эффект нажатия */
-.btn-locked:active {
-    transform: scale(0.98);
-}
-/* --- СТИЛИ РЕФЕРАЛЬНОЙ СИСТЕМЫ --- */
-
-.ref-btn {
-    background: #1a1a1a;        /* Цвет как у баланса */
-    padding: 10px 15px;         /* Те же внутренние отступы */
-    border-radius: 15px;        /* То же скругление */
-    border: 1px solid #333;     /* Та же рамка */
-    color: white;
-    font-weight: 900;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Магия позиционирования: */
-    margin-left: auto;          /* Толкает кнопку вправо к балансу */
-    margin-right: 10px;         /* Зазор между кнопкой и балансом */
-    height: 44px;               /* Фиксированная высота как у баланса */
-    min-width: 50px;
-}
-
-.ref-btn:active {
-    transform: scale(0.95);
-    background: #252525;
-}
-
-/* Стили для внутреннего окна (модалки) рефералов */
+/* Стили рефералов */
 .ref-info-box {
     background: rgba(255, 215, 0, 0.05);
     border: 1px dashed #D4AF37;
@@ -190,26 +133,26 @@ button.btn-locked::after {
 .gold-text { color: #FFD700; font-weight: 900; }
 
 .ref-list-container {
-    background: #0d0d0d;
-    border-radius: 15px;
-    padding: 15px;
-    min-height: 100px;
-    margin-top: 10px;
-    border: 1px solid #222;
+    background: #0d0d0d; border-radius: 15px; padding: 15px; min-height: 100px;
+    margin-top: 10px; border: 1px solid #222;
 }
 
-.ref-list-title { 
-    font-size: 12px; 
-    color: #888; 
-    margin-bottom: 10px; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
+.ref-list-title { font-size: 12px; color: #888; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+.empty-list { color: #444; text-align: center; font-size: 14px; margin-top: 20px; font-style: italic; }
+
+/* Элементы заблокированной кнопки */
+button.btn-locked {
+    opacity: 0.5 !important;
+    filter: grayscale(0.8) !important;
+    cursor: not-allowed;
+    position: relative;
 }
 
-.empty-list {
-    color: #444;
-    text-align: center;
-    font-size: 14px;
-    margin-top: 20px;
-    font-style: italic;
+button.btn-locked::after {
+    content: 'ЗАБЛОКИРОВАНО';
+    position: absolute;
+    top: 3px; left: 50%; transform: translateX(-50%);
+    font-size: 7px; background: rgba(255, 0, 0, 0.6);
+    padding: 1px 5px; border-radius: 3px; color: white; font-weight: 700;
 }
