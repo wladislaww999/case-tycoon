@@ -105,41 +105,36 @@ body {
 .rare { border: 1px solid #4a90e2; }
 .special { border: 1px solid #00ffcc; }
 }
-.btn-locked {
-    filter: grayscale(0.5); /* Делаем цвета чуть холоднее */
-    position: relative;
-    overflow: hidden;
-}
 
-/* Эффект "заморозки" поверх кнопки */
-.btn-locked::after {
-    content: 'ЗАБЛОКИРОВАНО';
-    position: absolute;
-    font-size: 10px;
-    top: 5px;
-    background: #ff4444;
-    padding: 2px 8px;
-    border-radius: 5px;
-    color: white;
-}
-/* Увеличиваем размер монетки во всей игре */
+/* --- НОВЫЕ ИСПРАВЛЕННЫЕ СТИЛИ --- */
+
+/* 1. Монетка: делаем реально большой и заметной */
 .mini-icon {
-    width: 24px;   /* Было скорее всего 18-20px, сделали побольше */
-    height: 24px;
+    width: 28px !important; 
+    height: 28px !important;
     vertical-align: middle;
-    margin-left: 4px;
+    margin-left: 6px;
     object-fit: contain;
 }
 
-/* Стиль для заблокированной кнопки */
-.btn-locked {
-    opacity: 0.6;           /* Делаем кнопку полупрозрачной (тусклой) */
-    filter: grayscale(0.3); /* Немного убираем сочность цветов */
+/* 2. Заблокированная кнопка: делаем тусклой */
+/* Используем button.btn-locked, чтобы перебить основной цвет .green-btn */
+button.btn-locked {
+    opacity: 0.5 !important;   /* Тусклость 50% */
+    filter: grayscale(0.8) !important; /* Почти серая */
+    cursor: not-allowed;
     position: relative;
+    box-shadow: none !important;
 }
 
-/* Немного уменьшим цену внутри кнопки, чтобы замок выделялся */
+/* 3. Цена внутри заблокированной кнопки */
 .btn-locked .price {
-    font-size: 0.8em;
-    background: rgba(0, 0, 0, 0.3);
+    font-size: 0.85em;
+    background: rgba(0, 0, 0, 0.4) !important;
+    color: #ccc;
+}
+
+/* 4. Активный эффект (чтобы кнопка чуть дергалась при нажатии) */
+.btn-locked:active {
+    transform: scale(0.98);
 }
