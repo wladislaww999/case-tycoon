@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
     window.copyLink = function() {
         const userId = tg.initDataUnsafe?.user?.id || "000"; 
         // ЗАМЕНИ 'CaseTycoonBot' на реальный юзернейм твоего бота без @
-        const botUsername = "CaseTycoonBot"; 
+        const botUsername = "CaseTycoon_bot"; 
         const link = `https://t.me/${botUsername}?start=${userId}`;
 
         // Стандартный способ копирования для браузеров
