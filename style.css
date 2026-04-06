@@ -106,8 +106,6 @@ body {
 .special { border: 1px solid #00ffcc; }
 }
 
-/* --- НОВЫЕ ИСПРАВЛЕННЫЕ СТИЛИ --- */
-
 /* 1. Монетка: делаем реально большой и заметной */
 .mini-icon {
     width: 28px !important; 
@@ -117,14 +115,29 @@ body {
     object-fit: contain;
 }
 
-/* 2. Заблокированная кнопка: делаем тусклой */
-/* Используем button.btn-locked, чтобы перебить основной цвет .green-btn */
+/* 2. Заблокированная кнопка: тусклая + микро-надпись */
 button.btn-locked {
-    opacity: 0.5 !important;   /* Тусклость 50% */
-    filter: grayscale(0.8) !important; /* Почти серая */
+    opacity: 0.5 !important;
+    filter: grayscale(0.8) !important;
     cursor: not-allowed;
     position: relative;
     box-shadow: none !important;
+}
+
+/* Сама микро-надпись */
+button.btn-locked::after {
+    content: 'ЗАБЛОКИРОВАНО';
+    position: absolute;
+    top: 4px;             /* Чуть отступили от верха */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;       /* Сверх-мелкий размер */
+    letter-spacing: 0.5px;
+    background: rgba(255, 0, 0, 0.6);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: white;
+    font-weight: 700;
 }
 
 /* 3. Цена внутри заблокированной кнопки */
@@ -134,7 +147,7 @@ button.btn-locked {
     color: #ccc;
 }
 
-/* 4. Активный эффект (чтобы кнопка чуть дергалась при нажатии) */
+/* 4. Эффект нажатия */
 .btn-locked:active {
     transform: scale(0.98);
 }
