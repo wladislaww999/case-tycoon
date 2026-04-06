@@ -40,48 +40,48 @@
             </div>
         </main>
 
-        <div id="info-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="toggleInfo()">&times;</span>
-                <h2 class="gold-title" style="font-size: 24px; text-align: center; margin-bottom: 20px;">СОДЕРЖИМОЕ КЕЙСА</h2>
-                <div class="loot-list">
-                    <div class="loot-item mythic"><img src="iphone17promax.png"><p>iPhone 17 Pro Max</p></div>
-                    <div class="loot-item mythic"><img src="macbook.png"><p>MacBook Pro</p></div>
-                    <div class="loot-item rare"><img src="iphone17.png"><p>iPhone 17</p></div>
-                    <div class="loot-item rare"><img src="ipad.png"><p>iPad Pro</p></div>
-                    <div class="loot-item rare"><img src="applew.png"><p>Apple Watch</p></div>
-                    <div class="loot-item special"><img src="tgprem.png"><p>TG Premium (1 year)</p></div>
-                    <div class="loot-item special"><img src="tgstars.png"><p>TG Stars (500-5000)</p></div>
-                    <div class="loot-item special"><img src="usdt.png"><p>USDT Crypto (100-1000)</p></div>
-                    <div class="loot-item common">
-                        <img src="coin.png">
-                        <p>Набор Валюты (50-70 $)</p>
-                    </div>
-                </div>
+<div id="info-modal" class="modal">
+    <div class="modal-content">
+        <h2 class="gold-title" style="font-size: 24px; text-align: center; margin-bottom: 20px;">СОДЕРЖИМОЕ КЕЙСА</h2>
+        <span class="close-btn" onclick="toggleInfo()">&times;</span>
+        
+        <div class="loot-list">
+            <div class="loot-item mythic"><img src="iphone17promax.png"><p>iPhone 17 Pro Max</p></div>
+            <div class="loot-item mythic"><img src="macbook.png"><p>MacBook Pro</p></div>
+            <div class="loot-item rare"><img src="iphone17.png"><p>iPhone 17</p></div>
+            <div class="loot-item rare"><img src="ipad.png"><p>iPad Pro</p></div>
+            <div class="loot-item rare"><img src="applew.png"><p>Apple Watch</p></div>
+            <div class="loot-item special"><img src="tgprem.png"><p>TG Premium (1 year)</p></div>
+            <div class="loot-item special"><img src="tgstars.png"><p>TG Stars (500-5000)</p></div>
+            <div class="loot-item special"><img src="usdt.png"><p>USDT Crypto (100-1000)</p></div>
+            <div class="loot-item common">
+                <img src="coin.png">
+                <p>Набор Валюты (50-70 $)</p>
             </div>
         </div>
+    </div>
+</div>
 
-        <div id="referral-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="window.toggleReferral()">&times;</span>
-                <h2 class="gold-title" style="font-size: 24px; text-align: center;">РЕФЕРАЛЫ</h2>
-                
-                <div class="ref-info-box">
-                    <p>Пригласи друга и получи <br><span class="gold-text">+300 КОИНОВ</span></p>
-                </div>
-
-                <div class="ref-list-container">
-                    <p class="ref-list-title">Список друзей:</p>
-                    <div id="ref-list-empty" class="empty-list">Пока что нет приглашенных друзей</div>
-                    <div id="ref-list-data" style="display: none;">
-                        </div>
-                </div>
-
-                <button class="action-btn blue-btn" onclick="window.copyLink()" style="margin-top: 20px;">
-                    КОПИРОВАТЬ ССЫЛКУ
-                </button>
-            </div>
+<div id="referral-modal" class="modal">
+    <div class="modal-content">
+        <h2 class="gold-title" style="font-size: 24px; text-align: center; margin-bottom: 10px;">РЕФЕРАЛЫ</h2>
+        <span class="close-btn" onclick="window.toggleReferral()">&times;</span>
+        
+        <div class="ref-info-box">
+            <p>Пригласи друга и получи <br><span class="gold-text">+300 КОИНОВ</span></p>
         </div>
+
+        <div class="ref-list-container">
+            <p class="ref-list-title">Список друзей:</p>
+            <div id="ref-list-empty" class="empty-list">Пока что нет приглашенных друзей</div>
+            <div id="ref-list-data" style="display: none;"></div>
+        </div>
+
+        <button class="action-btn blue-btn" onclick="window.copyLink()" style="margin-top: 20px;">
+            КОПИРОВАТЬ ССЫЛКУ
+        </button>
+    </div>
+</div>
 
     </div>
     <script src="script.js"></script>
