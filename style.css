@@ -122,3 +122,24 @@ body {
     border-radius: 5px;
     color: white;
 }
+/* Увеличиваем размер монетки во всей игре */
+.mini-icon {
+    width: 24px;   /* Было скорее всего 18-20px, сделали побольше */
+    height: 24px;
+    vertical-align: middle;
+    margin-left: 4px;
+    object-fit: contain;
+}
+
+/* Стиль для заблокированной кнопки */
+.btn-locked {
+    opacity: 0.6;           /* Делаем кнопку полупрозрачной (тусклой) */
+    filter: grayscale(0.3); /* Немного убираем сочность цветов */
+    position: relative;
+}
+
+/* Немного уменьшим цену внутри кнопки, чтобы замок выделялся */
+.btn-locked .price {
+    font-size: 0.8em;
+    background: rgba(0, 0, 0, 0.3);
+}
