@@ -74,3 +74,18 @@ body { background-color: #0d0d0d; color: white; height: 100vh; width: 100vw; ove
 /* Заблокировано */
 button.btn-locked { opacity: 0.5 !important; filter: grayscale(0.8) !important; cursor: not-allowed; position: relative; }
 button.btn-locked::after { content: 'ЗАБЛОКИРОВАНО'; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); font-size: 7px; background: rgba(255, 0, 0, 0.6); padding: 1px 5px; border-radius: 3px; color: white; font-weight: 700; }
+
+img {
+    /* ЗАЩИТА IOS */
+    -webkit-touch-callout: none;    /* Прямой запрет меню Safari */
+    
+    /* ЗАЩИТА ANDROID / CHROME */
+    -webkit-user-drag: none;         /* Запрет "вытягивания" картинки */
+    pointer-events: none;            /* Делает картинку "невидимой" для системного клика */
+    
+    /* ОБЩАЯ ЗАЩИТА */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;               /* Запрет выделения объекта */
+}
