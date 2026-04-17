@@ -61,7 +61,7 @@ body { background-color: #0d0d0d; color: white; height: 100vh; width: 100vw; ove
 .common { border: 1px solid #333 !important; }
 
 /* Монетки в списках (выравнивание) */
-.list-coin { width: 14px; height: 14px; vertical-align: middle; margin-left: 4px; position: relative; top: -1px; }
+.list-coin { width: 12px; height: 14px; vertical-align: middle; margin-left: 2px; position: relative; top: -1px; }
 
 .rank-num { width: 30px; font-weight: 900; color: #555; text-align: center; }
 .top-1 { color: #FFD700; font-size: 20px; }
