@@ -105,3 +105,17 @@ img {
 .modal-content {
     padding-top: 15px !important; 
 }
+
+/* Прижимаем монетку в верхнем балансе */
+.balance-badge .mini-icon {
+    margin-left: 2px !important; /* Было 8px, теперь почти вплотную */
+}
+
+/* Прижимаем монетку в кнопках */
+.action-btn .mini-icon {
+    margin-left: 2px !important; /* Было 8px */
+}
+
+.list-coin {
+    margin-left: 2px !important; /* Минимальный отступ */
+}
