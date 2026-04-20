@@ -1,5 +1,5 @@
-// Переносим инициализацию наружу для надежности
-const SUPABASE_URL = 'https://lfuyzmlkdwjivaxxcir.supabase.co'; // Я исправил твой URL на правильный формат
+// Инициализация Supabase
+const SUPABASE_URL = 'https://lfuyzmlkdwjivaxxcir.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmdXl6bWxka3dqaXd2YXh4Y2lyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MjkyMzYsImV4cCI6MjA5MDIwNTIzNn0.1eR2hatEDe4vPYZc_wSNYtEha1dTmVtlT1onNYzvhDQ';
 const ADSGRAM_BLOCK_ID = '28176';
 
@@ -14,13 +14,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let balance = 0;
 
-    // --- ЗАГРУЗКА ИГРОКА ---
+    // --- СИНХРОНИЗАЦИЯ ДАННЫХ ---
     async function syncData() {
         const user = tg.initDataUnsafe?.user;
         if (!user) return;
 
         try {
-            let { data: dbUser, error } = await supabaseClient
+            let { data: dbUser } = await supabaseClient
                 .from('users')
                 .select('*')
                 .eq('tg_id', user.id)
@@ -42,7 +42,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (dbUser) {
                 balance = dbUser.balance;
-                document.getElementById('balance').innerText = balance.toLocaleString();
+                const balanceEl = document.getElementById('balance');
+                if (balanceEl) balanceEl.innerText = balance.toLocaleString();
             }
         } catch (e) {
             console.error("Ошибка синхронизации:", e);
@@ -52,20 +53,15 @@ window.addEventListener('DOMContentLoaded', () => {
     syncData();
 
     // --- РЕКЛАМА ---
-    // Убираем обязательный event, чтобы работало при обычном вызове
     window.addTicketsBatch = function() {
         const user = tg.initDataUnsafe?.user;
-        if (!user) {
-            alert("Ошибка: Зайдите через Telegram");
-            return;
-        }
+        if (!user) return;
 
-        // Пытаемся найти кнопку в DOM
         const btn = document.querySelector('.blue-btn');
         if (btn) btn.disabled = true;
 
         if (!window.Adsgram) {
-            alert("Рекламный блок еще не загружен");
+            tg.showAlert("Рекламный блок еще загружается, подождите 5 секунд...");
             if (btn) btn.disabled = false;
             return;
         }
@@ -73,16 +69,90 @@ window.addEventListener('DOMContentLoaded', () => {
         const AdController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
         
         AdController.show().then(async () => {
+            // Используем твою функцию claim_ad_reward для рекламы
             const { data } = await supabaseClient.rpc('claim_ad_reward', { user_id: user.id });
-            if (data?.success) {
-                await syncData();
-                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-            }
+            await syncData();
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
             if (btn) btn.disabled = false;
-        }).catch((err) => {
-            console.error('Ошибка Adsgram:', err);
+        }).catch(() => {
             if (btn) btn.disabled = false;
         });
+    };
+
+    // --- ЗАДАНИЯ (НОВОВВЕДЕНИЯ) ---
+    window.renderTasks = async function() {
+        const container = document.getElementById('task-list');
+        if (!container) return;
+        container.innerHTML = "<div style='text-align:center;'>Загрузка...</div>";
+        
+        const user = tg.initDataUnsafe?.user;
+        if (!user) return;
+
+        try {
+            // Получаем список всех задач из таблицы tasks
+            const { data: allTasks } = await supabaseClient.from('tasks').select('*').order('id', { ascending: true });
+            // Получаем выполненные задачи текущим пользователем
+            const { data: doneTasks } = await supabaseClient.from('user_tasks').select('task_key').eq('user_tg_id', user.id);
+            
+            const doneKeys = doneTasks ? doneTasks.map(t => t.task_key) : [];
+
+            if (!allTasks || allTasks.length === 0) {
+                container.innerHTML = "<div style='text-align:center;'>Заданий пока нет</div>";
+                return;
+            }
+
+            container.innerHTML = allTasks.map(t => {
+                const isDone = doneKeys.includes(t.key);
+                return `
+                    <div class="loot-item" style="opacity: ${isDone ? '0.6' : '1'};">
+                        <div style="flex:1">
+                            <div style="font-weight:700;">${t.title}</div>
+                            <div style="color: #ffd700; font-weight: 900; font-size: 14px;">+${t.reward.toLocaleString()} 🪙</div>
+                        </div>
+                        <button class="action-btn" 
+                            style="width: auto; padding: 8px 15px; ${isDone ? 'background: #444;' : ''}"
+                            onclick="${isDone ? '' : `window.doTask('${t.key}', '${t.link}')`}" 
+                            ${isDone ? 'disabled' : ''}>
+                            ${isDone ? 'ГОТОВО' : 'ВЫПОЛНИТЬ'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        } catch (err) {
+            console.error("Ошибка при загрузке задач:", err);
+        }
+    };
+
+    window.doTask = async function(key, link) {
+        const user = tg.initDataUnsafe?.user;
+        if (!user) return;
+
+        if (link && link !== '#') {
+            tg.openTelegramLink(link);
+        }
+
+        tg.showAlert("Проверка... Награда будет начислена через 5 секунд");
+
+        setTimeout(async () => {
+            try {
+                // Вызываем твою новую функцию claim_task_reward
+                const { data } = await supabaseClient.rpc('claim_task_reward', { 
+                    u_id: user.id, 
+                    t_key: key 
+                });
+
+                if (data?.success) {
+                    await syncData();
+                    window.renderTasks();
+                    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('success');
+                    tg.showAlert(`✅ Выполнено! +${data.reward} 🪙`);
+                } else {
+                    tg.showAlert(data?.message || "Уже выполнено или ошибка");
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }, 5000);
     };
 
     // --- МОДАЛЬНЫЕ ОКНА ---
@@ -93,19 +163,22 @@ window.addEventListener('DOMContentLoaded', () => {
         m.style.display = isOpen ? "none" : "block";
         
         if (!isOpen) {
-            if (id === 'tasks-modal') renderTasks();
+            if (id === 'tasks-modal') window.renderTasks();
             if (id === 'leaderboard-modal') renderLeaderboard();
         }
         if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     };
 
-    // Привязываем функции к глобальному окну
     window.toggleInfo = () => window.toggleModal('info-modal');
     window.toggleTasks = () => window.toggleModal('tasks-modal');
     window.toggleLeaderboard = () => window.toggleModal('leaderboard-modal');
     window.toggleReferral = () => window.toggleModal('referral-modal');
 
+    // Кнопка ОТКРЫТЬ (Start)
     window.startSpin = function() {
+        // Добавил вибрацию здесь!
+        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+
         const messages = [
             "🏦 Хранилище закрыто! Листинг откроет замки.",
             "🚀 Ракета заправляется... Ожидай листинг!",
@@ -114,9 +187,10 @@ window.addEventListener('DOMContentLoaded', () => {
             "🚧 Идут технические работы. Ожидай листинг!"
         ];
         const msg = messages[Math.floor(Math.random() * messages.length)];
-        if (tg.showAlert) tg.showAlert(msg); else alert(msg);
+        tg.showAlert(msg);
     };
 
+    // --- ЛИДЕРБОРД ---
     async function renderLeaderboard() {
         const container = document.getElementById('leader-list');
         if (!container) return;
@@ -139,6 +213,7 @@ window.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // --- РЕФЕРАЛКА ---
     window.copyLink = function() {
         const userId = tg.initDataUnsafe?.user?.id || '0';
         const link = `https://t.me/CaseTycoon_bot?start=${userId}`;
@@ -146,7 +221,7 @@ window.addEventListener('DOMContentLoaded', () => {
         i.value = link; document.body.appendChild(i); i.select();
         document.execCommand("copy"); 
         document.body.removeChild(i);
-        if (tg.showAlert) tg.showAlert("✅ Ссылка скопирована!");
+        tg.showAlert("✅ Ссылка скопирована!");
     };
 
     document.addEventListener('contextmenu', e => e.target.tagName === 'IMG' && e.preventDefault());
