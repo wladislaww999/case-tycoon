@@ -134,7 +134,7 @@ window.addEventListener('DOMContentLoaded', () => {
     window.toggleReferral = () => window.toggleModal('referral-modal');
 
     window.startSpin = function() {
-        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('heavy');
         const msgs = ["🏦 Хранилище закрыто!", "🚀 Ракета заправляется...", "💎 Ожидай листинг!"];
         tg.showAlert(msgs[Math.floor(Math.random() * msgs.length)]);
     };
